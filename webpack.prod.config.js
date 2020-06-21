@@ -6,6 +6,9 @@ const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 let config = require("./webpack.config.js");
 const paths = require("./utils/paths");
 
+config.mode = "production";
+config.devtool = false;
+
 config.plugins.push(
   new CopyPlugin({
     patterns: [

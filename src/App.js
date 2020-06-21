@@ -7,7 +7,12 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 import "./assets/scss/index.scss";
 import Routes from "./Routes";
 import { LinearProgress } from "@material-ui/core";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
 
+const client = new ApolloClient({
+  uri: "/api",
+});
 const browserHistory = createBrowserHistory();
 
 export default class App extends Component {
@@ -15,9 +20,11 @@ export default class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Suspense fallback={<LinearProgress />}>
-          <Router history={browserHistory}>
-            <Routes />
-          </Router>
+          <ApolloProvider client={client}>
+            <Router history={browserHistory}>
+              <Routes />
+            </Router>
+          </ApolloProvider>
         </Suspense>
       </ThemeProvider>
     );

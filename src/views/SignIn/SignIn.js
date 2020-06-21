@@ -5,6 +5,8 @@ import validate from "validate.js";
 import { makeStyles } from "@material-ui/styles";
 import { Grid, Button, IconButton, TextField, Link, Typography } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { useMutation } from "react-apollo";
+import LoginMutation from "../../graphql/mutations/Login.graphql";
 
 const schema = {
   email: {
@@ -119,6 +121,7 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = (props) => {
   const { history } = props;
 
+  const [login, { data }] = useMutation(LoginMutation);
   const classes = useStyles();
 
   const [formState, setFormState] = useState({
@@ -161,7 +164,13 @@ const SignIn = (props) => {
 
   const handleSignIn = (event) => {
     event.preventDefault();
-    history.push("/");
+    login({
+      variables: {
+        email: formState.values.email,
+        password: formState.values.password,
+      },
+    });
+    //history.push("/");
   };
 
   const hasError = (field) =>
