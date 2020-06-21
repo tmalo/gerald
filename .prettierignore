@@ -1,0 +1,7 @@
+#tests
+/coverage 
+
+# production
+/build
+/dist
+/public
