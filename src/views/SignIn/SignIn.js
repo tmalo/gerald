@@ -8,7 +8,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useMutation } from "react-apollo";
-import LoginMutation from "../../graphql/mutations/Login.graphql";
+import LoginMutation from "../../graphql/remote/mutations/Login.graphql";
 import LoginForm from "./LoginForm";
 
 const useStyles = makeStyles((theme) => ({
