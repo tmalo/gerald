@@ -23,8 +23,21 @@ const access = { userIsAdmin, userOwnsItem, userIsAdminOrOwner };
 
 const UserSchema = {
   fields: {
-    name: { type: Text },
+    nom: {
+      type: Text,
+    },
+    prenom: {
+      type: Text,
+    },
+    agentColt: {
+      type: Text,
+      isUnique: true,
+    },
     email: {
+      type: Text,
+      isUnique: true,
+    },
+    telephone: {
       type: Text,
       isUnique: true,
     },
