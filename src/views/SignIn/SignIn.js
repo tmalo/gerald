@@ -1,26 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/styles";
 import { Link as RouterLink, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import validate from "validate.js";
-import { makeStyles } from "@material-ui/styles";
-import { Grid, Button, IconButton, TextField, Link, Typography } from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
-const schema = {
-  email: {
-    presence: { allowEmpty: false, message: "is required" },
-    email: true,
-    length: {
-      maximum: 64,
-    },
-  },
-  password: {
-    presence: { allowEmpty: false, message: "is required" },
-    length: {
-      maximum: 128,
-    },
-  },
-};
+import { Grid, IconButton, Typography } from "@material-ui/core";
+import { Alert, AlertTitle } from "@material-ui/lab";
+
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { useMutation } from "react-apollo";
+import LoginMutation from "../../graphql/remote/mutations/Login.graphql";
+import LoginForm from "./LoginForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 300,
   },
   name: {
-    marginTop: theme.spacing(3),
+    paddingTop: theme.spacing(3),
     color: theme.palette.white,
   },
   bio: {
@@ -86,6 +75,9 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center",
     },
   },
+  message: {
+    fontSize: theme.typography.subtitle2.fontSize,
+  },
   form: {
     paddingLeft: 100,
     paddingRight: 100,
@@ -98,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(2),
   },
   socialButtons: {
     marginTop: theme.spacing(3),
@@ -105,67 +98,63 @@ const useStyles = makeStyles((theme) => ({
   socialIcon: {
     marginRight: theme.spacing(1),
   },
-  sugestion: {
-    marginTop: theme.spacing(2),
-  },
-  textField: {
-    marginTop: theme.spacing(2),
-  },
-  signInButton: {
-    margin: theme.spacing(2, 0),
-  },
 }));
 
 const SignIn = (props) => {
   const { history } = props;
 
-  const classes = useStyles();
-
-  const [formState, setFormState] = useState({
-    isValid: false,
-    values: {},
-    touched: {},
-    errors: {},
+  const [status, setStatus] = useState({
+    hasErrors: false,
+    errorText: (
+      <>
+        <strong>Echec :</strong> Les informations d&apos;identifications sont invalides.
+      </>
+    ),
   });
 
-  useEffect(() => {
-    const errors = validate(formState.values, schema);
+  const clearError = () => {
+    setStatus({
+      hasErrors: false,
+      errorText: "",
+    });
+  };
 
-    setFormState((formState) => ({
-      ...formState,
-      isValid: errors ? false : true,
-      errors: errors || {},
-    }));
-  }, [formState.values]);
+  const [login, { data }] = useMutation(LoginMutation, {
+    onCompleted: (data) => {
+      localStorage.setItem("token", data.authenticateUserWithPassword.token);
+      history.push("/");
+    },
+    onError: (error) => {
+      var errMsg = "Les informations d'identifications sont invalides.";
+
+      if (!error.message.includes("passwordAuth:")) errMsg = error.message;
+
+      setStatus({
+        hasErrors: true,
+        errorText: (
+          <>
+            <strong>Echec : </strong>
+            {errMsg}
+          </>
+        ),
+      });
+    },
+  });
+  const classes = useStyles();
 
   const handleBack = () => {
     history.goBack();
   };
 
-  const handleChange = (event) => {
-    event.persist();
-
-    setFormState((formState) => ({
-      ...formState,
-      values: {
-        ...formState.values,
-        [event.target.name]:
-          event.target.type === "checkbox" ? event.target.checked : event.target.value,
+  const handleSubmit = ({ email, password }) => {
+    login({
+      variables: {
+        email: email,
+        password: password,
       },
-      touched: {
-        ...formState.touched,
-        [event.target.name]: true,
-      },
-    }));
+    });
+    //history.push("/");
   };
-
-  const handleSignIn = (event) => {
-    event.preventDefault();
-    history.push("/");
-  };
-
-  const hasError = (field) =>
-    formState.touched[field] && formState.errors[field] ? true : false;
 
   return (
     <div className={classes.root}>
@@ -196,60 +185,19 @@ const SignIn = (props) => {
               </IconButton>
             </div>
             <div className={classes.contentBody}>
-              <form className={classes.form} onSubmit={handleSignIn}>
+              <div className={classes.form}>
                 <Typography className={classes.title} variant="h2">
                   Sign in
                 </Typography>
-                <Typography
-                  align="center"
-                  className={classes.sugestion}
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  login with email address
-                </Typography>
-                <TextField
-                  className={classes.textField}
-                  error={hasError("email")}
-                  fullWidth
-                  helperText={hasError("email") ? formState.errors.email[0] : null}
-                  label="Email address"
-                  name="email"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.email || ""}
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  error={hasError("password")}
-                  fullWidth
-                  helperText={hasError("password") ? formState.errors.password[0] : null}
-                  label="Password"
-                  name="password"
-                  onChange={handleChange}
-                  type="password"
-                  value={formState.values.password || ""}
-                  variant="outlined"
-                />
-                <Button
-                  className={classes.signInButton}
-                  color="primary"
-                  disabled={!formState.isValid}
-                  fullWidth
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                >
-                  Sign in now
-                </Button>
-                <Typography color="textSecondary" variant="body1">
-                  Don&#39;t have an account?{" "}
-                  <Link component={RouterLink} to="/sign-up" variant="h6">
-                    Sign up
-                  </Link>
-                </Typography>
-              </form>
+
+                {status.hasErrors && (
+                  <Alert severity="error" className={classes.message}>
+                    <AlertTitle>Error</AlertTitle>
+                    {status.errorText}
+                  </Alert>
+                )}
+                <LoginForm onSubmit={handleSubmit} formChanged={clearError} />
+              </div>
             </div>
           </div>
         </Grid>
