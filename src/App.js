@@ -13,6 +13,7 @@ import { ApolloProvider } from "react-apollo";
 const client = new ApolloClient({
   uri: "/api",
 });
+
 const browserHistory = createBrowserHistory();
 
 export default class App extends Component {
