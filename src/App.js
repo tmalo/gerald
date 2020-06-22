@@ -12,6 +12,14 @@ import { ApolloProvider } from "react-apollo";
 
 const client = new ApolloClient({
   uri: "/api",
+  request: (operation) => {
+    const token = localStorage.getItem("token");
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    });
+  },
 });
 
 const browserHistory = createBrowserHistory();

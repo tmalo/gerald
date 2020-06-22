@@ -14,6 +14,7 @@
         "node": true
     },
     "plugins": [
+        "prettier",
         "react"
     ],
     "ignorePatterns": ["setupTests.js"],
@@ -23,7 +24,7 @@
         "eqeqeq": "warn",
         "node/no-missing-require": "error",
         "node/no-unsupported-features/es-syntax": "off",
-        "multiline-ternary": ["warn", "always-multiline"]    
+        "multiline-ternary": ["warn", "always-multiline"]
     },
     "settings": {
         "react": {
@@ -51,6 +52,7 @@
         "eslint:recommended",
         "plugin:node/recommended",
         "plugin:react/recommended",
-        "plugin:prettier/recommended"
+        //"plugin:prettier/recommended",
+        "prettier/react"        
     ]
 }

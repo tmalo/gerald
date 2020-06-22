@@ -120,14 +120,14 @@ const SignIn = (props) => {
   };
 
   const [login, { data }] = useMutation(LoginMutation, {
+    onCompleted: (data) => {
+      localStorage.setItem("token", data.authenticateUserWithPassword.token);
+      history.push("/");
+    },
     onError: (error) => {
       var errMsg = "Les informations d'identifications sont invalides.";
 
-      if (
-        !error.message.includes("[passwordAuth:secret:mismatch]") &&
-        !error.message.includes("[passwordAuth:identity:notFound]")
-      )
-        errMsg = error.message;
+      if (!error.message.includes("passwordAuth:")) errMsg = error.message;
 
       setStatus({
         hasErrors: true,
@@ -138,8 +138,6 @@ const SignIn = (props) => {
           </>
         ),
       });
-      // [passwordAuth:secret:mismatch]
-      //[passwordAuth:identity:notFound]
     },
   });
   const classes = useStyles();
