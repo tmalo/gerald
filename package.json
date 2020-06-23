@@ -7,7 +7,7 @@
     "node": ">=14.0.0"
   },
   "scripts": {
-    "lint": "eslint -c ./src/.eslintrc ./src",
+    "lint": "eslint -c ./.eslintrc.json ./src",
     "dev": "yarn server:dev & yarn start",
     "build": "yarn client:build && yarn server:build",
     "clean": "rm -rf build/ && rm -rf dist/",
@@ -120,19 +120,21 @@
   },
   "lint-staged": {
     "*.+(js|jsx)": [
-      "eslint --fix -c ./src/.eslintrc"
+      "eslint --fix -c ./.eslintrc.json"
     ],
     "*.+(js|jsx|json|css|md)": [
       "prettier --write"
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.3",
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
     "@babel/preset-react": "^7.10.1",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-import-graphql": "^2.7.0",
+    "babel-plugin-module-resolver": "^4.0.0",
     "case-sensitive-paths-webpack-plugin": "^2.3.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.0.2",
@@ -143,6 +145,9 @@
     "enzyme-to-json": "^3.5.0",
     "eslint": "^7.3.0",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-import-resolver-babel-module": "^5.1.2",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.0",

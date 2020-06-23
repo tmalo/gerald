@@ -9,6 +9,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const paths = require("./utils/paths");
 const getClientEnvironment = require("./utils/env");
+const npm_package = require("./package.json");
 
 // We will provide `paths.publicUrlOrPath` to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
@@ -32,7 +33,12 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: [path.resolve(__dirname, "src")],
         exclude: /node_modules/,
-        loader: "babel-loader",
+        use: {
+          loader: "babel-loader",
+          options: {
+            configFile: path.resolve(__dirname, "babel.config.json"),
+          },
+        },
       },
 
       //css loader
