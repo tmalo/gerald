@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["."],
+        "alias": {
+          "api": "./src/graphql",
+          "components": "./src/components"
+        },
+        "extensions": [".js", ".jsx", ".graphql"]
+      }
+    ],
+    "import-graphql"
+  ],
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
