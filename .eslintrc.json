@@ -1,0 +1,48 @@
+{
+  "parser": "babel-eslint",
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "detect"
+    },
+    "linkComponents": [
+      "Hyperlink",
+      {
+        "name": "Link",
+        "linkAttribute": "to"
+      }
+    ],
+    "import/resolver": {
+      "babel-module": {}
+    }
+  },
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors", // if that file exports something the other file can import it and if it doesn't export it cant be imported somewhere else
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended", // this is doing some more abilities to understand accessibility
+    "prettier",
+    "prettier/react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "plugins": ["import", "react", "jsx-a11y", "prettier"],
+  "rules": {
+    "no-undef": 1,
+    "no-unused-vars": "warn",
+    "eqeqeq": "warn",
+    "node/no-unsupported-features/es-syntax": "off",
+    "multiline-ternary": ["warn", "always-multiline"]
+  }
+}
