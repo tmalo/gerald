@@ -8,7 +8,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useMutation } from "react-apollo";
-import LoginMutation from "../../graphql/remote/mutations/Login.graphql";
+import LoginMutation from "api/remote/mutations/Login.graphql";
 import LoginForm from "./LoginForm";
 
 const useStyles = makeStyles((theme) => ({
@@ -123,6 +123,15 @@ const SignIn = (props) => {
     onCompleted: (data) => {
       localStorage.setItem("token", data.authenticateUserWithPassword.token);
       history.push("/");
+      //alert(data);
+    },
+    update: (proxy, result) => {
+      proxy.writeData({
+        data: {
+          isLoggedIn: true,
+          authenticatedUser: result.data.authenticateUserWithPassword.item,
+        },
+      });
     },
     onError: (error) => {
       var errMsg = "Les informations d'identifications sont invalides.";

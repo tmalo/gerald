@@ -3,7 +3,10 @@ import { Link as RouterLink } from "react-router-dom";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-import { Avatar, Typography } from "@material-ui/core";
+import { Avatar, Typography, CircularProgress } from "@material-ui/core";
+import { Query } from "react-apollo";
+import ProfileQuery from "api/remote/queries/Profile.graphql";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,30 +24,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function getInitials(user) {
+  return `${user.prenom.slice(0, 1)}${user.nom.slice(0, 1)}`.toUpperCase();
+}
+
 const Profile = (props) => {
   const { className, ...rest } = props;
+  var history = useHistory();
 
   const classes = useStyles();
 
-  const user = {
-    name: "Shen Zhi",
-    avatar: "/images/avatars/avatar_11.png",
-    bio: "Brain Director",
-  };
-
   return (
     <div {...rest} className={clsx(classes.root, className)}>
-      <Avatar
-        alt="Person"
-        className={classes.avatar}
-        component={RouterLink}
-        src={user.avatar}
-        to="/settings"
-      />
-      <Typography className={classes.name} variant="h4">
-        {user.name}
-      </Typography>
-      <Typography variant="body2">{user.bio}</Typography>
+      <Query query={ProfileQuery}>
+        {({ loading, error, data }) => {
+          if (loading) return <CircularProgress />;
+
+          if (data.authenticatedUser === null) {
+            history.push("/sign-in");
+            return "not authenticated";
+          }
+
+          if (error) return `Error! ${error}`;
+
+          return (
+            <>
+              <Avatar
+                alt="Person"
+                className={classes.avatar}
+                component={RouterLink}
+                to="/settings"
+              >
+                {getInitials(data.authenticatedUser)}
+              </Avatar>
+              <Typography className={classes.name} variant="h4">
+                {data.authenticatedUser.prenom} {data.authenticatedUser.nom}
+              </Typography>
+              <Typography variant="body2">Conseiller</Typography>
+            </>
+          );
+        }}
+      </Query>
     </div>
   );
 };

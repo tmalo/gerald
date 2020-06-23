@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 
-import { ContratTable } from "../../components/Contrats";
+import { ContratTable } from "components/Contrats";
 
 import { Detail as DetailLayout } from "../../layouts";
 

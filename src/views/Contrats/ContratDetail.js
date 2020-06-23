@@ -10,9 +10,9 @@ import BusinessIcon from "@material-ui/icons/Business";
 import PeopleIcon from "@material-ui/icons/People";
 import { Detail as DetailLayout } from "../../layouts";
 import { default as ContratInfo } from "./ContratInfo";
-import { default as TabPanel } from "../../components/TabPanel";
-import { default as SiteTable } from "../../components/Contrats/SiteTable";
-import { default as UsagerTable } from "../../components/Usagers/UsagerTable";
+import { default as TabPanel } from "components/TabPanel";
+import { default as SiteTable } from "components/Contrats/SiteTable";
+import { default as UsagerTable } from "components/Usagers/UsagerTable";
 
 const useStyles = makeStyles((theme) => ({
   root: {

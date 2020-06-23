@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Grid } from "@material-ui/core";
 
-import { DemandeTable } from "../../components/Demandes";
+import { DemandeTable } from "components/Demandes";
 
 const useStyles = makeStyles((theme) => ({
   root: {
