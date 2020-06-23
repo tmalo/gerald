@@ -1,8 +1,6 @@
 {
   "editor.tabSize": 2,
   "editor.wordWrapColumn": 90,
-  "editor.formatOnSave": true, // enable a formatter to format on save
-  "prettier.requireConfig": true, // prettier only run if installed
   "eslint.workingDirectories": [
     {
       "directory": "./src",

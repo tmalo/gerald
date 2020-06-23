@@ -7,6 +7,7 @@ import { AppBar, Toolbar, Badge, Hidden, IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
 import InputIcon from "@material-ui/icons/Input";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Topbar = (props) => {
   const { className, onSidebarOpen, ...rest } = props;
+  var history = useHistory();
 
   const classes = useStyles();
 
@@ -40,7 +42,14 @@ const Topbar = (props) => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton className={classes.signOutButton} color="inherit">
+          <IconButton
+            className={classes.signOutButton}
+            color="inherit"
+            onClick={() => {
+              localStorage.removeItem("token");
+              history.push("/sign-in");
+            }}
+          >
             <InputIcon />
           </IconButton>
         </Hidden>
