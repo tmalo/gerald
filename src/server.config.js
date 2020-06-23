@@ -54,6 +54,11 @@ usagerList(keystone);
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
   list: "User",
+  config: {
+    identityField: "email",
+    secretField: "password",
+    protectIdentities: true,
+  },
 });
 
 module.exports = {

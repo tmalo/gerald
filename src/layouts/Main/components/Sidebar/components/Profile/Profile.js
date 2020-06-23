@@ -4,6 +4,7 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { Avatar, Typography } from "@material-ui/core";
+import ProfileQuery from "api/remote/queries/Profile.graphql";
 
 const useStyles = makeStyles((theme) => ({
   root: {
