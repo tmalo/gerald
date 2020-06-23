@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 
-import { DemandeForm } from "../../components/Demandes";
+import { DemandeForm } from "components/Demandes";
 import { Detail as DetailLayout } from "../../layouts";
 
 const AddDemande = () => {
