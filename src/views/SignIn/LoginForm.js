@@ -105,6 +105,7 @@ const LoginForm = (props) => {
         name="email"
         onChange={handleChange}
         type="text"
+        autoComplete="email"
         value={formState.values.email || ""}
         variant="outlined"
       />
@@ -117,6 +118,7 @@ const LoginForm = (props) => {
         name="password"
         onChange={handleChange}
         type="password"
+        autoComplete="current-password"
         value={formState.values.password || ""}
         variant="outlined"
       />

@@ -123,6 +123,15 @@ const SignIn = (props) => {
     onCompleted: (data) => {
       localStorage.setItem("token", data.authenticateUserWithPassword.token);
       history.push("/");
+      //alert(data);
+    },
+    update: (proxy, result) => {
+      proxy.writeData({
+        data: {
+          isLoggedIn: true,
+          authenticatedUser: result.data.authenticateUserWithPassword.item,
+        },
+      });
     },
     onError: (error) => {
       var errMsg = "Les informations d'identifications sont invalides.";

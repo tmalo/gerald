@@ -1,5 +1,9 @@
 mutation Login($email: String!, $password: String!) {
 	authenticateUserWithPassword(email: $email, password: $password) {
     token
+    item {
+      nom
+      prenom
+    }
   }
 }
