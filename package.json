@@ -8,16 +8,16 @@
   },
   "scripts": {
     "lint": "eslint -c ./.eslintrc.json ./src",
-    "dev": "yarn server:dev & yarn start",
+    "dev": "yarn server:dev & yarn client:dev",
     "build": "yarn client:build && yarn server:build",
     "clean": "rm -rf build/ && rm -rf dist/",
     "server:dev": "cross-env NODE_ENV=development DISABLE_LOGGING=false keystone dev --entry src/server.config.js",
     "server:build": "cross-env NODE_ENV=production keystone build --entry src/server.config.js",
-    "server:start": "cross-env NODE_ENV=production node src/server.js",
+    "start": "cross-env NODE_ENV=production node src/server.js",
     "server:create-tables": "cross-env CREATE_TABLES=true keystone create-tables --entry src/server.js",
-    "start": "cross-env PORT=5000 NODE_ENV=development webpack-dev-server --config ./webpack.dev.config.js --silent",
+    "client:dev": "cross-env PORT=5000 NODE_ENV=development webpack-dev-server --config ./webpack.dev.config.js --silent",
     "client:build": "cross-env NODE_ENV=production webpack --config ./webpack.prod.config.js --mode production",
-    "client:test": "jest",
+    "test": "jest",
     "eject": "react-scripts eject",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
   },
@@ -122,7 +122,7 @@
     "*.+(js|jsx)": [
       "eslint --fix -c ./.eslintrc.json"
     ],
-    "*.+(js|jsx|json|css|md)": [
+    "*.+(graphql|json|s?css|md)": [
       "prettier --write"
     ]
   },
