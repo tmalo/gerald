@@ -54,7 +54,7 @@
     "express-session": "^1.17.1",
     "forky": "^1.2.0",
     "formik": "^2.1.4",
-    "graphql": "^15.1.0",
+    "graphql": "^14.6.0",
     "helmet": "^3.23.1",
     "history": "^4.10.1",
     "material-ui-formik-components": "^0.7.1",
