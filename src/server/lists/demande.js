@@ -146,46 +146,9 @@ const DemandeSchema = {
   plugins: [atTracking(), byTracking()],
 };
 
-const myDemandes = async (_a, { id }, _b, _c, { query }) => {
-  const {
-    errors, // eslint-disable-line no-unused-vars
-    data,
-  } = await query(`
-  query {
-      allDemandes(
-        where: { conseiller: { id: "${id}" } }
-        orderBy: "createdAt_DESC"
-      ) {
-        id
-        _label_
-        slug
-        subject
-        etape
-        difficulte
-        date_reponse
-        createdAt
-        conseiller {
-          id
-          _label_
-        }
-      }
-    }
-  `);
-
-  return data.allDemandes;
-};
 
 const createList = (keystone) => {
   var demandeList = keystone.createList("Demande", DemandeSchema);
-
-  keystone.extendGraphQLSchema({
-    queries: [
-      {
-        schema: "myDemandes(id: ID!): [Demande]",
-        resolver: myDemandes,
-      },
-    ],
-  });
 
   return demandeList;
 };

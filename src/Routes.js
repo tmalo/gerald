@@ -27,11 +27,10 @@ const Routes = () => {
         path="/sign-in"
       />
 
-      {!data.isLoggedIn ? (
-        <Redirect to="/sign-in" />
-      ) : (
-        <Redirect exact from="/" to="/dashboard" />
-      )}
+      {!data.isLoggedIn ? 
+        (<Redirect to="/sign-in" />) : 
+        (<Redirect exact from="/" to="/dashboard" />)
+      }
 
       <RouteWithLayout
         component={AddDemande}
