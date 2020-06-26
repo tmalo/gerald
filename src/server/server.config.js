@@ -3,17 +3,13 @@ const { PasswordAuthStrategy } = require("@keystonejs/auth-password");
 const { GraphQLApp } = require("@keystonejs/app-graphql");
 const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const { StaticApp } = require("@keystonejs/app-static");
-const userList = require("./lists/user.js");
-const contratList = require("./lists/contrat.js");
-const siteList = require("./lists/site.js");
-const usagerList = require("./lists/usager.js");
-const conversationList = require("./lists/conversation.js");
-const demandeList = require("./lists/demande.js");
 const { MongooseAdapter: Adapter } = require("@keystonejs/adapter-mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
 const config = require("../config.js");
+const lists = require("./lists");
+const extraGraphQL = require("./graphql");
 
 const PROJECT_NAME = "Gerald";
 const adapterConfig = {
@@ -44,12 +40,8 @@ const keystone = new Keystone({
   cookieSecret: config.auth.cookieSecret,
 });
 
-userList(keystone);
-contratList(keystone);
-siteList(keystone);
-demandeList(keystone);
-conversationList(keystone);
-usagerList(keystone);
+lists.declareLists(keystone);
+extraGraphQL.extendGraphQLSchema(keystone);
 
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
