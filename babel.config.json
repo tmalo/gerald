@@ -5,12 +5,14 @@
       {
         "root": ["."],
         "alias": {
-          "api": "./src/graphql",
-          "components": "./src/components"
+          "api": "./src/front/graphql",
+          "enums": "./src/enums",
+          "components": "./src/front/components"
         },
         "extensions": [".js", ".jsx", ".graphql"]
       }
     ],
+    "@babel/plugin-syntax-dynamic-import",
     "import-graphql"
   ],
   "presets": ["@babel/preset-env", "@babel/preset-react"]

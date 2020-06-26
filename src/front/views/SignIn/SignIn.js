@@ -7,7 +7,7 @@ import { Grid, IconButton, Typography } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
 
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { useMutation } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
 import LoginMutation from "api/remote/mutations/Login.graphql";
 import LoginForm from "./LoginForm";
 

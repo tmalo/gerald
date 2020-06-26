@@ -18,7 +18,7 @@ const npm_package = require("./package.json");
 const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 
 module.exports = {
-  entry: ["./src/index.js"],
+  entry: ["./src/front/index.js"],
   output: {
     path: path.resolve(__dirname, "build"),
     publicPath: "/",
@@ -31,7 +31,7 @@ module.exports = {
       //js loader
       {
         test: /\.(js|jsx)$/,
-        include: [path.resolve(__dirname, "src")],
+        include: [path.resolve(__dirname, "src/front")],
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",

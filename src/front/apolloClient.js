@@ -3,7 +3,6 @@ import { default as typeDefs } from "api/local/typeDefs.js";
 
 const def_user = {
   isLoggedIn: !!localStorage.getItem("token"),
-  authenticatedUser: {},
 };
 
 const client = new ApolloClient({

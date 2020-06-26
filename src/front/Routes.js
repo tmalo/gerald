@@ -3,16 +3,26 @@ import { Switch, Redirect, Route } from "react-router-dom";
 import { LinearProgress } from "@material-ui/core";
 
 import { RouteWithLayout } from "components";
-import { useQuery } from "react-apollo";
+import { useQuery } from "@apollo/react-hooks";
 
-import { Main as MainLayout, Minimal as MinimalLayout } from "./layouts";
+import { default as MainLayout } from "./layouts/Main";
 import { NotFound as NotFoundView } from "./views";
 import chemins from "./chemins";
 import LoggedIn from "api/local/queries/LoggedIn.graphql";
 
-const AddDemande = React.lazy(() => import("./views/AddDemande"));
-const ContratDetail = React.lazy(() => import("./views/Contrats/ContratDetail"));
-const SignInView = React.lazy(() => import("./views/SignIn"));
+const MinimalLayout = React.lazy(() =>
+  import(/* webpackChunkName: "outside" */ "./layouts/Minimal")
+);
+
+const AddDemande = React.lazy(() =>
+  import(/* webpackChunkName: "inside" */ "./views/AddDemande")
+);
+const ContratDetail = React.lazy(() =>
+  import(/* webpackChunkName: "inside" */ "./views/Contrats/ContratDetail")
+);
+const SignInView = React.lazy(() =>
+  import(/* webpackChunkName: "outside" */ "./views/SignIn")
+);
 
 const Routes = () => {
   const { loading, error, data } = useQuery(LoggedIn);
@@ -27,10 +37,11 @@ const Routes = () => {
         path="/sign-in"
       />
 
-      {!data.isLoggedIn ? 
-        (<Redirect to="/sign-in" />) : 
-        (<Redirect exact from="/" to="/dashboard" />)
-      }
+      {!data.isLoggedIn ? (
+        <Redirect to="/sign-in" />
+      ) : (
+        <Redirect exact from="/" to="/dashboard" />
+      )}
 
       <RouteWithLayout
         component={AddDemande}

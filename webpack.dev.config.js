@@ -12,9 +12,10 @@ config.devServer = {
   proxy: {
     "/api": "http://localhost:3000",
   },
-  compress: true,
+  compress: false,
   hot: true,
   port: process.env.PORT || 9000,
+  clientLogLevel: "debug",
 };
 
 config.plugins.concat([

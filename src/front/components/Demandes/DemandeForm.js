@@ -20,7 +20,7 @@ moment.locale("fr");
 const editorState = EditorState.createEmpty();
 const contentState = convertToRaw(editorState.getCurrentContent());
 
-const enums = require("../../enums");
+const enums = require("enums");
 
 const useStyles = makeStyles(() => ({
   root: {},
