@@ -5,7 +5,7 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { TableCell, TableRow } from "@material-ui/core";
 
-import { ContratType_options, getLabel } from "../../enums";
+import { ContratType_options, getLabel } from "enums";
 
 var moment = require("moment");
 require("moment/locale/fr");

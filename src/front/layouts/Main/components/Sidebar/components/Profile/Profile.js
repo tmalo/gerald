@@ -4,7 +4,7 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { Avatar, Typography, CircularProgress } from "@material-ui/core";
-import { Query } from "react-apollo";
+import { Query } from "@apollo/react-components";
 import ProfileQuery from "api/remote/queries/Profile.graphql";
 import { useHistory } from "react-router-dom";
 

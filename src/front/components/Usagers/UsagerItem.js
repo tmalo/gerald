@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { TableCell, TableRow } from "@material-ui/core";
 import { default as StatusBullet } from "../StatusBullet";
 import LastCall from "../LastCall";
-import { Nature_options, statusColors } from "../../enums";
+import { Nature_options, statusColors } from "enums";
 
 const useStyles = makeStyles((theme) => ({
   root: {},

@@ -2,7 +2,9 @@ import React from "react";
 import { Dashboard as DashboardIcon } from "@material-ui/icons";
 import SvgIcon from "@material-ui/core/SvgIcon";
 
-const MainLayout = React.lazy(() => import("./layouts/Main"));
+const MainLayout = React.lazy(() =>
+  import(/* webpackChunkName: "layouts" */ "./layouts/Main")
+);
 const Dashboard = React.lazy(() => import("./views/Dashboard"));
 const ContratsView = React.lazy(() => import("./views/Contrats/ContratsView"));
 

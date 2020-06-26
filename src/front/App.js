@@ -7,7 +7,7 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 import "./assets/scss/index.scss";
 import Routes from "./Routes";
 import { LinearProgress } from "@material-ui/core";
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider } from "@apollo/react-components";
 import client from "./apolloClient";
 
 const browserHistory = createBrowserHistory();
