@@ -13,7 +13,7 @@ const { MongooseAdapter: Adapter } = require("@keystonejs/adapter-mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
-const config = require("./config.js");
+const config = require("../config.js");
 
 const PROJECT_NAME = "Gerald";
 const adapterConfig = {
