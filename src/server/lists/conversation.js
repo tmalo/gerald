@@ -1,4 +1,4 @@
-const { Text, Select, CalendarDay, Relationship } = require("@keystonejs/fields");
+const { Text, Select, Relationship, DateTime } = require("@keystonejs/fields");
 const { Content } = require("@keystonejs/field-content");
 const { atTracking } = require("@keystonejs/list-plugins");
 const enums = require("../../enums");
@@ -17,10 +17,11 @@ const conversationSchema = {
       isRequired: true,
     },
     date: {
-      type: CalendarDay,
-      format: "DD/MM/YYYY",
+      type: DateTime,
+      format: "DD/MM/YYYY HH:MM:ss",
       yearRangeFrom: 2020,
-    },
+    },    
+    
     commentaire: {
       type: Content,
     },
