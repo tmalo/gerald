@@ -1,6 +1,6 @@
 const { Text, Select, CalendarDay, Slug, Relationship } = require("@keystonejs/fields");
 const { atTracking } = require("@keystonejs/list-plugins");
-const enums = require("../enums");
+const enums = require("../../enums");
 
 const ContratSchema = {
   labelField: "societe",
