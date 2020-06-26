@@ -1,4 +1,4 @@
-const logger = require('@keystonejs/logger').logger("gerald");
+const logger = require("@keystonejs/logger").logger("gerald");
 
 const myDemandes = async (parent, args, context, info, extra) => {
   // get id
@@ -13,8 +13,7 @@ const myDemandes = async (parent, args, context, info, extra) => {
 
   const userId = rep.data?.authenticatedUser?.id;
 
-  if(!userId)
-    return null;
+  if (!userId) return null;
 
   var { data } = await extra.query(
     `query {
@@ -32,13 +31,13 @@ const myDemandes = async (parent, args, context, info, extra) => {
         createdAt
       }
     }
-    `);
-    
+    `
+  );
+
   return data.allDemandes;
-}
+};
 
 const extendGraphQL = (keystone) => {
-
   keystone.extendGraphQLSchema({
     queries: [
       {
@@ -46,6 +45,6 @@ const extendGraphQL = (keystone) => {
         resolver: myDemandes,
       },
     ],
-  });  
-}
+  });
+};
 module.exports = extendGraphQL;

@@ -146,7 +146,6 @@ const DemandeSchema = {
   plugins: [atTracking(), byTracking()],
 };
 
-
 const createList = (keystone) => {
   var demandeList = keystone.createList("Demande", DemandeSchema);
 
