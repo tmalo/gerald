@@ -25,6 +25,11 @@ module.exports = {
     filename: "js/[name].bundle.js",
     chunkFilename: "js/[name].js",
   },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+  },
   devtool: "source-map",
   module: {
     rules: [

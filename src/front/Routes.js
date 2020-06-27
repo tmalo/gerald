@@ -2,13 +2,19 @@ import React from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
 import { LinearProgress } from "@material-ui/core";
 
-import { RouteWithLayout } from "components";
+import RouteWithLayout from "components/RouteWithLayout";
 import { useQuery } from "@apollo/react-hooks";
 
-import { default as MainLayout } from "./layouts/Main";
-import { NotFound as NotFoundView } from "./views";
+const MainLayout = React.lazy(() =>
+  import(/* webpackChunkName: "inside" */ "./layouts/Main")
+);
+
 import chemins from "./chemins";
 import LoggedIn from "api/local/queries/LoggedIn.graphql";
+
+const NotFoundView = React.lazy(() =>
+  import(/* webpackChunkName: "outside" */ "./views/NotFound")
+);
 
 const MinimalLayout = React.lazy(() =>
   import(/* webpackChunkName: "outside" */ "./layouts/Minimal")
