@@ -7,6 +7,7 @@ const def_user = {
 
 const client = new ApolloClient({
   uri: "/api",
+  connectToDevTools: process.env.NODE_ENV === "development",
   clientState: {
     defaults: def_user,
     typeDefs: typeDefs,

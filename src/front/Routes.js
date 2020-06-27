@@ -21,10 +21,10 @@ const MinimalLayout = React.lazy(() =>
 );
 
 const AddDemande = React.lazy(() =>
-  import(/* webpackChunkName: "inside" */ "./views/AddDemande")
+  import(/* webpackChunkName: "demande" */ "./views/AddDemande")
 );
 const ContratDetail = React.lazy(() =>
-  import(/* webpackChunkName: "inside" */ "./views/Contrats/ContratDetail")
+  import(/* webpackChunkName: "contrat" */ "./views/Contrats/ContratDetail")
 );
 const SignInView = React.lazy(() =>
   import(/* webpackChunkName: "outside" */ "./views/SignIn")

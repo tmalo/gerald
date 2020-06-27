@@ -8,6 +8,36 @@ const paths = require("./utils/paths");
 
 config.mode = "production";
 config.devtool = false;
+config.optimization = {
+  splitChunks: {
+    chunks: "all",
+    automaticNameDelimiter: "~",
+    cacheGroups: {
+      vendor: {
+        maxSize: 266240,
+        test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom)[\\/]/,
+        name: "vendor",
+        chunks: "all",
+      },
+      defaultVendors: {
+        test: /[\\/]node_modules[\\/]/,
+        // cacheGroupKey here is `commons` as the key of the cacheGroup
+        name(module, chunks, cacheGroupKey) {
+          const allChunksNames = chunks.map((item) => item.name).join("~");
+          return `core-${allChunksNames}`;
+        },
+
+        priority: -10,
+        reuseExistingChunk: true,
+      },
+      default: {
+        minChunks: 2,
+        priority: -20,
+        reuseExistingChunk: true,
+      },
+    },
+  },
+};
 
 config.plugins.push(
   new CopyPlugin({

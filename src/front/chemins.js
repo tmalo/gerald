@@ -8,7 +8,9 @@ const MainLayout = React.lazy(() =>
 const Dashboard = React.lazy(() =>
   import(/* webpackChunkName: "inside" */ "./views/Dashboard")
 );
-const ContratsView = React.lazy(() => import("./views/Contrats/ContratsView"));
+const ContratsView = React.lazy(() =>
+  import(/* webpackChunkName: "contrat" */ "./views/Contrats/ContratsView")
+);
 
 const ContratIcon = (props) => {
   return (
