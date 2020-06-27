@@ -1,0 +1,22 @@
+query {
+  mesDemandes {
+    id
+    slug
+    subject
+    difficulte
+    etape
+    usager {
+      id
+      nom
+      prenom
+      contrat {
+        id
+        societe
+      }
+      conversations(first: 1, orderBy: "createdAt_DESC") {
+        nature
+        date
+      }
+    }
+  }
+}

@@ -56,7 +56,6 @@
     "draft-js": "^0.11.6",
     "forky": "^1.2.0",
     "formik": "^2.1.4",
-    "graphql": "^15.1.0",
     "helmet": "^3.23.3",
     "history": "4.x",
     "material-ui-formik-components": "^0.7.1",

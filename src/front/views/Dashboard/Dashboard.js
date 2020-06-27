@@ -1,6 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Grid } from "@material-ui/core";
+import { Grid, CircularProgress } from "@material-ui/core";
+
+import { Query } from "@apollo/react-components";
+import mesDemandesQuery from "api/remote/queries/mesDemandes.graphql";
 
 import { DemandeTable } from "components/Demandes";
 
@@ -13,80 +16,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const demandes = [
-  {
-    slug: "2020-MALO-THIERRY-001",
-    contrat: {
-      id: "5ede2146a2206313085c3d68",
-      societe: "AAA_FORMATION",
-    },
-    contact: {
-      id: "18",
-      nom: "MALO",
-      prenom: "Thierry",
-    },
-    objet: "Aide à domicile pour ma mère",
-    difficulte: 1,
-    lastContact: {
-      nature: "MAIL",
-      date: "2020-06-14 15:52:34",
-    },
-  },
-  {
-    slug: "2020-MALO-THIERRY-002",
-    contrat: {
-      id: "5ede2146a2206313085c3d68",
-      societe: "AAA_FORMATION",
-    },
-    contact: {
-      id: "18",
-      nom: "MALO",
-      prenom: "Thierry",
-    },
-    objet: "Aide à domicile pour ma mère",
-    difficulte: 3,
-    lastContact: {
-      nature: "LTTR",
-      date: "2020-06-14 15:52:34",
-    },
-  },
-  {
-    slug: "2020-MALO-THIERRY-003",
-    contrat: {
-      id: "5ede2146a2206313085c3d68",
-      societe: "AAA_FORMATION",
-    },
-    contact: {
-      id: "18",
-      nom: "MALO",
-      prenom: "Thierry",
-    },
-    objet: "Aide à domicile pour ma mère",
-    difficulte: 1,
-    lastContact: {
-      nature: "CALL",
-      date: "2020-06-15 16:32:34",
-    },
-  },
-  {
-    slug: "2020-MALO-THIERRY-004",
-    contrat: {
-      id: "5ede2146a2206313085c3d68",
-      societe: "AAA_FORMATION",
-    },
-    contact: {
-      id: "18",
-      nom: "MALO",
-      prenom: "Thierry",
-    },
-    objet: "Aide à domicile pour ma mère",
-    difficulte: 2,
-    lastContact: {
-      nature: "ESPB",
-      date: "2020-06-14 16:52:34",
-    },
-  },
-];
+const formatDemande = (item) => {
+  return {
+    id: item.id,
+    slug: item.slug,
+    contrat: item.usager.contrat,
+    contact: item.usager,
+    objet: item.subject,
+    difficulte: Number(item.difficulte),
+    lastContact: item.usager.conversations ? item.usager.conversations[0] : undefined,
+  };
+};
 
 const Dashboard = () => {
   const classes = useStyles();
@@ -96,7 +36,15 @@ const Dashboard = () => {
       <div className={classes.content}>
         <Grid container spacing={4}>
           <Grid item md={12} xs={12}>
-            <DemandeTable demandes={demandes} />
+            <Query query={mesDemandesQuery}>
+              {({ loading, error, data }) => {
+                if (loading) return <CircularProgress />;
+
+                if (error) return `Error! ${error}`;
+
+                return <DemandeTable demandes={data.mesDemandes.map(formatDemande)} />;
+              }}
+            </Query>
           </Grid>
         </Grid>
       </div>

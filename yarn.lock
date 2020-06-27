@@ -7227,11 +7227,6 @@ graphql@^14.5.3, graphql@^14.6.0:
   dependencies:
     iterall "^1.2.2"
 
-graphql@^15.1.0:
-  version "15.1.0"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.1.0.tgz#b93e28de805294ec08e1630d901db550cb8960a1"
-  integrity sha512-0TVyfOlCGhv/DBczQkJmwXOK6fjWkjzY3Pt7wY8i0gcYXq8aogG3weCsg48m72lywKSeOqedEHvVPOvZvSD51Q==
-
 gzip-size@5.1.1, gzip-size@^5.0.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-5.1.1.tgz#cb9bee692f87c0612b232840a873904e4c135274"
