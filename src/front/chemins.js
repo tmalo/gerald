@@ -3,10 +3,14 @@ import { Dashboard as DashboardIcon } from "@material-ui/icons";
 import SvgIcon from "@material-ui/core/SvgIcon";
 
 const MainLayout = React.lazy(() =>
-  import(/* webpackChunkName: "layouts" */ "./layouts/Main")
+  import(/* webpackChunkName: "inside" */ "./layouts/Main")
 );
-const Dashboard = React.lazy(() => import("./views/Dashboard"));
-const ContratsView = React.lazy(() => import("./views/Contrats/ContratsView"));
+const Dashboard = React.lazy(() =>
+  import(/* webpackChunkName: "inside" */ "./views/Dashboard")
+);
+const ContratsView = React.lazy(() =>
+  import(/* webpackChunkName: "contrat" */ "./views/Contrats/ContratsView")
+);
 
 const ContratIcon = (props) => {
   return (

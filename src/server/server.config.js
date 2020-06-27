@@ -60,10 +60,11 @@ module.exports = {
       apiPath: "/api",
     }),
     new AdminUIApp({
+      adminPath: "/admin",
       apiPath: "/api",
       enableDefaultRoute: false,
       authStrategy,
-    }),
+    }), 
     new StaticApp({
       path: "/",
       src: "build",

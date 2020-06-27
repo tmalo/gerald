@@ -3886,6 +3886,13 @@ babel-loader@^8.0.5, babel-loader@^8.1.0:
     pify "^4.0.1"
     schema-utils "^2.6.5"
 
+babel-plugin-direct-import@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/babel-plugin-direct-import/-/babel-plugin-direct-import-0.6.2.tgz#97d2463a315a9c2eddc7be7a3c79f66802fbb06e"
+  integrity sha512-IhUKBX7TcNjk3uwAW2C/+qKfcyVyFWWtDSg8LxpwqgHn6j8HStp4Elh98kptJNynHuMZrZqnh5m/M7zGpRzA8Q==
+  dependencies:
+    resolve "^1.15.1"
+
 babel-plugin-dynamic-import-node@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/babel-plugin-dynamic-import-node/-/babel-plugin-dynamic-import-node-2.3.3.tgz#84fda19c976ec5c6defef57f9427b3def66e17a3"

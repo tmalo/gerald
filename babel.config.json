@@ -13,7 +13,13 @@
       }
     ],
     "@babel/plugin-syntax-dynamic-import",
-    "import-graphql"
+    "import-graphql",
+    [
+      "babel-plugin-direct-import",
+      {
+        "modules": ["@material-ui/core", "@material-ui/icons", "@material-ui/styles"]
+      }
+    ]
   ],
   "presets": ["@babel/preset-env", "@babel/preset-react"]
 }
