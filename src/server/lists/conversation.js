@@ -20,8 +20,8 @@ const conversationSchema = {
       type: DateTime,
       format: "DD/MM/YYYY HH:MM:ss",
       yearRangeFrom: 2020,
-    },    
-    
+    },
+
     commentaire: {
       type: Content,
     },

@@ -1,6 +1,4 @@
-
-const myDemandes = async (parent, args, context, info, extra) => {
-  // get id
+const mesDemandes = async (parent, args, context, info) => {
   const rep = await context.executeGraphQL({
     query: `
     query {
@@ -9,8 +7,8 @@ const myDemandes = async (parent, args, context, info, extra) => {
       }
     }  
       `,
-  }); 
-  
+  });
+
   const userId = rep.data?.authenticatedUser?.id;
 
   if (!userId) return null;
@@ -21,35 +19,56 @@ const myDemandes = async (parent, args, context, info, extra) => {
       allDemandes(
         where: { conseiller: { id: $conseiller} }
         orderBy: "createdAt_DESC"
-      ) {
+      ) 
+      {
         id
-        _label_
-        slug
-        subject
-        etape
-        difficulte
-        date_reponse
-        createdAt
-            
+        _label_ 
+        subject 
+        slug 
+        etape 
+        difficulte 
+        date_reponse 
+        usager {
+          id
+        }        
+        updatedAt 
+        createdAt 
+        updatedBy {
+          id
+        }
+        createdBy {
+          id
+        }
+      
       }
+
     }
       `,
     variables: {
-      conseiller: userId
-    }
-  }); 
+      conseiller: userId,
+    },
+  });
 
-  console.log(JSON.stringify(rep2))
+  var myData = rep2.data.allDemandes.map((item) => {
+    var newItem = { ...item };
 
-  return rep2.data.allDemandes;
+    newItem.usager.toString = () => item.usager.id;
+
+    if (newItem.updatedBy) newItem.updatedBy.toString = () => item.updatedBy.id;
+    if (newItem.createdBy) newItem.createdBy.toString = () => item.createdBy.id;
+
+    return newItem;
+  });
+
+  return myData;
 };
 
 const extendGraphQL = (keystone) => {
   keystone.extendGraphQLSchema({
     queries: [
       {
-        schema: "myDemandes: [Demande]",
-        resolver: myDemandes,
+        schema: "mesDemandes: [Demande]",
+        resolver: mesDemandes,
       },
     ],
   });
