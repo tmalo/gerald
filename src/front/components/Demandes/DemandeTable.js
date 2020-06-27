@@ -125,6 +125,7 @@ DemandeTable.propTypes = {
   staticContext: PropTypes.any,
   demandes: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string.isRequired,
       slug: PropTypes.string.isRequired,
       contrat: PropTypes.shape({
         id: PropTypes.string,

@@ -25,6 +25,8 @@ const DemandeItem = (props) => {
 
   const classes = useStyles();
 
+  console.log(demande)
+
   return (
     <TableRow hover {...rest} className={clsx(classes.root, className)}>
       <TableCell>
@@ -34,7 +36,7 @@ const DemandeItem = (props) => {
             color={statusColors[demande.difficulte]}
             size="sm"
           />
-          <Link to={`/demande/${demande.slug}`}>{demande.slug}</Link>
+          <Link to={`/demande/${demande.id}`}>{demande.slug}</Link>
         </div>
       </TableCell>
       <TableCell>
@@ -48,14 +50,14 @@ const DemandeItem = (props) => {
       <TableCell>{demande.objet}</TableCell>
       <TableCell>
         <LastCall
-          className={classes.statusContainer}
-          label={
-            Nature_options.filter((n) => n.value === demande.lastContact.nature).shift()
-              .label
-          }
-          nature={demande.lastContact.nature}
-          callDate={demande.lastContact.date}
-        />
+            className={classes.statusContainer}
+            label={
+              Nature_options.filter((n) => n.value === demande.lastContact.nature).shift()
+                .label
+            }
+            nature={demande.lastContact.nature}
+            callDate={demande.lastContact.date}
+          />        
       </TableCell>
     </TableRow>
   );
@@ -64,6 +66,7 @@ const DemandeItem = (props) => {
 DemandeItem.propTypes = {
   className: PropTypes.string,
   demande: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     contrat: PropTypes.shape({
       id: PropTypes.string,

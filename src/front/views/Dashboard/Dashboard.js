@@ -13,6 +13,87 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const mesDemandes=[
+  {
+    "id": "5ee11b2c683be82733001c05",
+    "slug": "20200610-MALO-THIERRY-009",
+    "subject": "fgfh",
+    "difficulte": "1",
+    "etape": 1,
+    "usager": {
+      "id": "5ede22c60037ce1320ec9044",
+      "nom": "MALO",
+      "prenom": "Thierry",
+      "contrat": {
+        "id": "5ede2146a2206313085c3d68",
+        "societe": "Banque Postale"
+      },
+      "conversations": [
+        {
+          "nature": "CALL",
+          "date": "2020-06-20T14:53:28.000+02:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "5edf595516aad303b013b932",
+    "slug": "20200609-MALO-THIERRY-001",
+    "subject": "dfdf",
+    "difficulte": "1",
+    "etape": 1,
+    "usager": {
+      "id": "5ede22c60037ce1320ec9044",
+      "nom": "MALO",
+      "prenom": "Thierry",
+      "contrat": {
+        "id": "5ede2146a2206313085c3d68",
+        "societe": "Banque Postale"
+      },
+      "conversations": [
+        {
+          "nature": "CALL",
+          "date": "2020-06-20T14:53:28.000+02:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "5ede41353cef021452ff1989",
+    "slug": "20200608-MALO-THIERRY-001",
+    "subject": "Aide à domicile pour ma mère",
+    "difficulte": "2",
+    "etape": 1,
+    "usager": {
+      "id": "5ede22c60037ce1320ec9044",
+      "nom": "MALO",
+      "prenom": "Thierry",
+      "contrat": {
+        "id": "5ede2146a2206313085c3d68",
+        "societe": "Banque Postale"
+      },
+      "conversations": [
+        {
+          "nature": "CALL",
+          "date": "2020-06-20T14:53:28.000+02:00"
+        }
+      ]
+    }
+  }
+]
+
+const formatDemande = (item) => {
+  return {
+    id: item.id,
+    slug: item.slug,
+    contrat: item.usager.contrat,
+    contact: item.usager,
+    objet: item.subject,
+    difficulte: Number(item.difficulte),
+    lastContact: item.usager.conversations ? item.usager.conversations[0] : undefined
+  };
+}
+
 const demandes = [
   {
     slug: "2020-MALO-THIERRY-001",
@@ -96,7 +177,7 @@ const Dashboard = () => {
       <div className={classes.content}>
         <Grid container spacing={4}>
           <Grid item md={12} xs={12}>
-            <DemandeTable demandes={demandes} />
+            <DemandeTable demandes={mesDemandes.map(formatDemande)} />
           </Grid>
         </Grid>
       </div>
