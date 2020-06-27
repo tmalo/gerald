@@ -25,8 +25,6 @@ const DemandeItem = (props) => {
 
   const classes = useStyles();
 
-  console.log(demande)
-
   return (
     <TableRow hover {...rest} className={clsx(classes.root, className)}>
       <TableCell>
@@ -50,14 +48,14 @@ const DemandeItem = (props) => {
       <TableCell>{demande.objet}</TableCell>
       <TableCell>
         <LastCall
-            className={classes.statusContainer}
-            label={
-              Nature_options.filter((n) => n.value === demande.lastContact.nature).shift()
-                .label
-            }
-            nature={demande.lastContact.nature}
-            callDate={demande.lastContact.date}
-          />        
+          className={classes.statusContainer}
+          label={
+            Nature_options.filter((n) => n.value === demande.lastContact.nature).shift()
+              .label
+          }
+          nature={demande.lastContact.nature}
+          callDate={demande.lastContact.date}
+        />
       </TableCell>
     </TableRow>
   );
