@@ -60,13 +60,13 @@
     "history": "4.x",
     "material-ui-formik-components": "^0.7.1",
     "moment": "^2.27.0",
-    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-draft-wysiwyg": "^1.14.5",
     "react-inline-editing": "^1.0.10",
     "react-perfect-scrollbar": "^1.5.8",
     "react-router-dom": "^5.2.0",
+    "sass": "^1.32.12",
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
